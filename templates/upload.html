@@ -1,5 +1,12 @@
+{% extends "layout.html" %}
+
+{% block body %}
 {% if request_used_tor %}
 <p>You're using Tor! Redirecting you to the hidden service...</p>
 {% else %}
 <p>You're not using Tor? You *could* use a clearnet proxy...</p>
 {% endif %}
+
+<p>Your IP address is {{ client_ip }}</p>
+
+{% endblock %}

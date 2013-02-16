@@ -15,13 +15,15 @@ def index():
 
 @app.route('/upload')
 def upload():
-    def get_request_ip(request):
+    def get_ip_from_request(request):
         if 'HTTP_X_FORWARDED_FOR' in request.environ:
             return request.environ['HTTP_X_FORWARDED_FOR'].split(',')[0]
         else:
             return request.environ.get('REMOTE_ADDR')
-    using_tor = check_tor_ip(get_request_ip(request))
-    return render_template('upload.html', using_tor=using_tor)
+        
+    client_ip = get_ip_from_request(request)
+    return render_template('upload.html', using_tor=check_tor_ip(client_ip),
+            client_ip=client_ip)
 
 @app.route('/<path:path>/')
 def page(path):
