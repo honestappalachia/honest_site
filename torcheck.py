@@ -9,6 +9,8 @@ Original LICENSE: https://svn.torproject.org/svn/check/trunk/LICENSE
 import DNS
 DNS.DiscoverNameServers()
 
+# BUG in torcheck! Not correctly id'ing Tor exit nodes!
+
 def tor_check(clientIp, ELPort):
     # exit node IP
     splitIp = clientIp.split('.')
@@ -57,6 +59,11 @@ def check_tor_ip(ip):
     if using_tor != 0:
         # edge case - only HTTPS (port 443) allowed on exit node
         using_tor = tor_check(ip, '443')
+
+    # DEBUG
+    if using_tor == 0:
+        print "TOR EXIT"
+        
     if using_tor == 0:
         return True
     else:

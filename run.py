@@ -20,7 +20,6 @@ def upload():
             return request.environ['HTTP_X_FORWARDED_FOR'].split(',')[0]
         else:
             return request.environ.get('REMOTE_ADDR')
-        
     client_ip = get_ip_from_request(request)
     return render_template('upload.html', using_tor=check_tor_ip(client_ip),
             client_ip=client_ip)
