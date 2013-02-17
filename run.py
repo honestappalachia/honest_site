@@ -1,9 +1,11 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 from flask_flatpages import FlatPages
 
 from torcheck import check_tor_ip
+
+UPLOAD_ONION_URL = "http://xyz.onion" # can this live in settings.cfg?
 
 app = Flask(__name__)
 app.config.from_pyfile('settings.cfg')
@@ -21,8 +23,12 @@ def upload():
         else:
             return request.environ.get('REMOTE_ADDR')
     client_ip = get_ip_from_request(request)
-    return render_template('upload.html', using_tor=check_tor_ip(client_ip),
-            client_ip=client_ip)
+    using_tor = check_tor_ip(client_ip)
+    if using_tor:
+        return redirect(UPLOAD_ONION_URL)
+    else:
+        return render_template('upload.html', using_tor=using_tor,
+                client_ip=client_ip, upload_onion_url=UPLOAD_ONION_URL)
 
 @app.route('/<path:path>/')
 def page(path):
