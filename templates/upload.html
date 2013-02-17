@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{% if request_used_tor %}
+{% if using_tor %}
 <p>You're using Tor! Redirecting you to the hidden service...</p>
 {% else %}
 <p>You're not using Tor? You *could* use a clearnet proxy...</p>
