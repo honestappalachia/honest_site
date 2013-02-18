@@ -1,0 +1,21 @@
+div#upload-progress-box {
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:300px;
+  height:100px;
+  margin-left:-150px;
+  margin-top:-50px;
+  z-index:1;
+  visibility:hidden; /* hidden by default; shown by onclick event on upload link */
+  background:#ddd;
+  border:3px solid #aaa;
+  text-align:center;
+}
+
+/* Center the progress bar gif in the containing div */
+div#upload-progress-box img {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}

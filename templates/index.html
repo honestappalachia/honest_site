@@ -1,9 +1,18 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Honest Appalachia</title>
-  </head>
-  <body>
-    <a href="/upload">Upload</a>
-  </body>
-</html>
+{% extends "layout.html" %}
+
+{% block head %}
+<link rel=stylesheet type=text/css href="/static/index.css">
+{% endblock %}
+
+{% block body %}
+<a href="/upload" id="upload">Upload</a>
+<div id="upload-progress-box">
+  <p>Checking your IP address...</p>
+  <img src="/static/img/progress-bar.gif">
+</div>
+<script>
+  document.getElementById("upload").onclick = function () {
+    document.getElementById("upload-progress-box").style.visibility="visible";
+  };
+</script>
+{% endblock %}
